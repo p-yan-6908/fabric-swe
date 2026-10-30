@@ -25,10 +25,10 @@
     {
       "arm": "fabric-fovea",
       "runs": 10,
-      "resolved": 6,
-      "resolveRate": 0.6,
-      "meanScore": 0.9016666666666666,
-      "passAtK": 0.6,
+      "resolved": 7,
+      "resolveRate": 0.7,
+      "meanScore": 0.9349999999999999,
+      "passAtK": 0.7,
       "p2pRegressions": 1,
       "timeouts": 2,
       "errors": 0,
@@ -50,7 +50,7 @@
       "runs": 10,
       "resolved": 8,
       "resolveRate": 0.8,
-      "meanScore": 0.9666666666666666,
+      "meanScore": 0.9833333333333334,
       "passAtK": 0.8,
       "p2pRegressions": 1,
       "timeouts": 0,
@@ -76,10 +76,10 @@
       "trial": 1,
       "status": "completed",
       "wallMin": 28.46,
-      "resolved": false,
-      "score": 0.6666666666666666,
+      "resolved": true,
+      "score": 1,
       "failToPass": {
-        "passed": 4,
+        "passed": 6,
         "total": 6
       },
       "passToPass": {
@@ -96,7 +96,7 @@
         {
           "id": "rule-strings",
           "kind": "fail_to_pass",
-          "passed": false,
+          "passed": true,
           "timedOut": false
         },
         {
@@ -114,7 +114,7 @@
         {
           "id": "options-and-errors",
           "kind": "fail_to_pass",
-          "passed": false,
+          "passed": true,
           "timedOut": false
         },
         {
@@ -166,9 +166,9 @@
       "status": "completed",
       "wallMin": 44.93,
       "resolved": false,
-      "score": 0.6666666666666666,
+      "score": 0.8333333333333334,
       "failToPass": {
-        "passed": 4,
+        "passed": 5,
         "total": 6
       },
       "passToPass": {
@@ -185,7 +185,7 @@
         {
           "id": "rule-strings",
           "kind": "fail_to_pass",
-          "passed": false,
+          "passed": true,
           "timedOut": false
         },
         {
