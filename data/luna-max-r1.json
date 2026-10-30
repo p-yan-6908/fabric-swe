@@ -1,0 +1,1812 @@
+{
+  "id": "luna-max-r1",
+  "model": "openai-codex/gpt-6-luna",
+  "modelName": "GPT-6 Luna",
+  "thinking": "max",
+  "startedAt": "2026-10-30T03:49:32.057Z",
+  "finishedAt": "2026-10-30T06:45:52.676Z",
+  "trials": 1,
+  "arms": [
+    "fabric-fovea",
+    "vanilla"
+  ],
+  "armDescriptions": {
+    "fabric-fovea": "pi + pi-fabric (full code mode: a single fabric_exec tool) + pi-fovea (code graph)",
+    "vanilla": "pi with built-in tools only (read, bash, edit, write, grep, find, ls); no extensions"
+  },
+  "versions": {
+    "pi": "1.4.0",
+    "packages": {
+      "pi-fabric": "0.130.1",
+      "pi-fovea": "0.33.0"
+    }
+  },
+  "summary": [
+    {
+      "arm": "fabric-fovea",
+      "runs": 10,
+      "resolved": 6,
+      "resolveRate": 0.6,
+      "meanScore": 0.9016666666666666,
+      "passAtK": 0.6,
+      "p2pRegressions": 1,
+      "timeouts": 2,
+      "errors": 0,
+      "meanWallMin": 26.16718666666667,
+      "medianWallMin": 23.16315,
+      "totalCostUsd": 0.79372418,
+      "meanCostUsd": 0.079372418,
+      "meanPromptTokens": 4113104.6,
+      "meanUncachedInputTokens": 144835.8,
+      "meanOutputTokens": 50412.3,
+      "meanPeakContext": 138749.9,
+      "meanAssistantMessages": 46.3,
+      "meanToolCalls": 42.9,
+      "meanToolResultChars": 304794.3,
+      "runsWithUpstreamRefs": 0
+    },
+    {
+      "arm": "vanilla",
+      "runs": 10,
+      "resolved": 8,
+      "resolveRate": 0.8,
+      "meanScore": 0.9666666666666666,
+      "passAtK": 0.8,
+      "p2pRegressions": 1,
+      "timeouts": 0,
+      "errors": 0,
+      "meanWallMin": 22.870789999999996,
+      "medianWallMin": 17.64305,
+      "totalCostUsd": 0.7653408799999999,
+      "meanCostUsd": 0.07653408799999999,
+      "meanPromptTokens": 4645759,
+      "meanUncachedInputTokens": 121842.2,
+      "meanOutputTokens": 38221.4,
+      "meanPeakContext": 111638.8,
+      "meanAssistantMessages": 58.6,
+      "meanToolCalls": 98.8,
+      "meanToolResultChars": 252474.3,
+      "runsWithUpstreamRefs": 0
+    }
+  ],
+  "results": [
+    {
+      "task": "dateutil-rrulestr",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 28.46,
+      "resolved": false,
+      "score": 0.6666666666666666,
+      "failToPass": {
+        "passed": 4,
+        "total": 6
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "round-trip",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "rule-strings",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "rule-sets",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "dtstart-timezones",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "options-and-errors",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "tzical",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 2,
+      "turns": 48,
+      "toolCalls": 45,
+      "toolCallsByName": {
+        "fabric_exec": 45
+      },
+      "toolErrors": 7,
+      "tokens": {
+        "input": 191546,
+        "output": 78777,
+        "cacheRead": 5210880,
+        "cacheWrite": 0,
+        "reasoning": 55256,
+        "total": 5481203
+      },
+      "costUsd": 0.11065190000000001,
+      "peakContextTokens": 185030,
+      "compactions": 0,
+      "retries": 2,
+      "fabric": {
+        "execCalls": 45,
+        "codeChars": 36906,
+        "foveaCalls": {
+          "sketch": 1,
+          "impact": 2
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "dateutil-rrulestr",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 44.93,
+      "resolved": false,
+      "score": 0.6666666666666666,
+      "failToPass": {
+        "passed": 4,
+        "total": 6
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "round-trip",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "rule-strings",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "rule-sets",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "dtstart-timezones",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "options-and-errors",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "tzical",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 2,
+      "turns": 96,
+      "toolCalls": 118,
+      "toolCallsByName": {
+        "read": 27,
+        "grep": 15,
+        "find": 2,
+        "ls": 2,
+        "bash": 39,
+        "edit": 32,
+        "write": 1
+      },
+      "toolErrors": 10,
+      "tokens": {
+        "input": 170080,
+        "output": 66336,
+        "cacheRead": 9148672,
+        "cacheWrite": 0,
+        "reasoning": 48185,
+        "total": 9385088
+      },
+      "costUsd": 0.14166272,
+      "peakContextTokens": 159426,
+      "compactions": 0,
+      "retries": 7,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "expr-let-bindings",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "timeout",
+      "wallMin": 45,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 6,
+        "total": 6
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "lexer-parser",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "checker",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "evaluation",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "errors-print-walk",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "issue-regressions",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "corpus",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 9,
+      "turns": 55,
+      "toolCalls": 51,
+      "toolCallsByName": {
+        "fabric_exec": 51
+      },
+      "toolErrors": 5,
+      "tokens": {
+        "input": 141312,
+        "output": 53148,
+        "cacheRead": 4425984,
+        "cacheWrite": 0,
+        "reasoning": 33640,
+        "total": 4620444
+      },
+      "costUsd": 0.08496503999999998,
+      "peakContextTokens": 136947,
+      "compactions": 0,
+      "retries": 5,
+      "fabric": {
+        "execCalls": 51,
+        "codeChars": 18903,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 3,
+          "impact": 1
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "expr-let-bindings",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 35.77,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 6,
+        "total": 6
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "lexer-parser",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "checker",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "evaluation",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "errors-print-walk",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "issue-regressions",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "corpus",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 11,
+      "turns": 70,
+      "toolCalls": 99,
+      "toolCallsByName": {
+        "ls": 1,
+        "find": 1,
+        "read": 40,
+        "grep": 14,
+        "edit": 25,
+        "bash": 17,
+        "write": 1
+      },
+      "toolErrors": 4,
+      "tokens": {
+        "input": 134438,
+        "output": 44977,
+        "cacheRead": 5445248,
+        "cacheWrite": 0,
+        "reasoning": 31148,
+        "total": 5624663
+      },
+      "costUsd": 0.09038478000000003,
+      "peakContextTokens": 130445,
+      "compactions": 0,
+      "retries": 5,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "gotoml-decoder-regressions",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 19.28,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "int64-bounds",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "tz-offsets",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "table-redefinition",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "multiline-escapes",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "encode-del",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 5,
+      "turns": 31,
+      "toolCalls": 28,
+      "toolCallsByName": {
+        "fabric_exec": 28
+      },
+      "toolErrors": 4,
+      "tokens": {
+        "input": 104526,
+        "output": 28318,
+        "cacheRead": 1900928,
+        "cacheWrite": 0,
+        "reasoning": 17737,
+        "total": 2033772
+      },
+      "costUsd": 0.043620879999999994,
+      "peakContextTokens": 100012,
+      "compactions": 0,
+      "retries": 2,
+      "fabric": {
+        "execCalls": 28,
+        "codeChars": 9306,
+        "foveaCalls": {
+          "sketch": 1
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "gotoml-decoder-regressions",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 17.43,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "int64-bounds",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "tz-offsets",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "table-redefinition",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "multiline-escapes",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "encode-del",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 7,
+      "turns": 52,
+      "toolCalls": 78,
+      "toolCallsByName": {
+        "ls": 1,
+        "read": 22,
+        "bash": 23,
+        "find": 2,
+        "grep": 15,
+        "edit": 14,
+        "write": 1
+      },
+      "toolErrors": 5,
+      "tokens": {
+        "input": 88449,
+        "output": 19112,
+        "cacheRead": 2781568,
+        "cacheWrite": 0,
+        "reasoning": 11791,
+        "total": 2889129
+      },
+      "costUsd": 0.04621658000000001,
+      "peakContextTokens": 81209,
+      "compactions": 0,
+      "retries": 0,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "gotoml-wide-table-perf",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 16.84,
+      "resolved": false,
+      "score": 1,
+      "failToPass": {
+        "passed": 4,
+        "total": 4
+      },
+      "passToPass": {
+        "passed": 2,
+        "total": 3
+      },
+      "checks": [
+        {
+          "id": "perf-wide-tables",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "perf-table-headers",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "perf-dotted-keys",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "validation-at-scale",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "array-tables-at-scale",
+          "kind": "pass_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "tracker-semantics",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 3,
+      "turns": 26,
+      "toolCalls": 24,
+      "toolCallsByName": {
+        "fabric_exec": 24
+      },
+      "toolErrors": 1,
+      "tokens": {
+        "input": 127230,
+        "output": 32347,
+        "cacheRead": 1720832,
+        "cacheWrite": 0,
+        "reasoning": 25924,
+        "total": 1880409
+      },
+      "costUsd": 0.04610482,
+      "peakContextTokens": 114817,
+      "compactions": 0,
+      "retries": 1,
+      "fabric": {
+        "execCalls": 24,
+        "codeChars": 13448,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 1,
+          "impact": 1
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "gotoml-wide-table-perf",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 5.67,
+      "resolved": false,
+      "score": 1,
+      "failToPass": {
+        "passed": 4,
+        "total": 4
+      },
+      "passToPass": {
+        "passed": 2,
+        "total": 3
+      },
+      "checks": [
+        {
+          "id": "perf-wide-tables",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "perf-table-headers",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "perf-dotted-keys",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "validation-at-scale",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "array-tables-at-scale",
+          "kind": "pass_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "tracker-semantics",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 2,
+      "turns": 29,
+      "toolCalls": 45,
+      "toolCallsByName": {
+        "bash": 13,
+        "grep": 6,
+        "read": 17,
+        "ls": 2,
+        "edit": 6,
+        "write": 1
+      },
+      "toolErrors": 2,
+      "tokens": {
+        "input": 69935,
+        "output": 19375,
+        "cacheRead": 1309952,
+        "cacheWrite": 0,
+        "reasoning": 15073,
+        "total": 1399262
+      },
+      "costUsd": 0.029780519999999998,
+      "peakContextTokens": 65960,
+      "compactions": 0,
+      "retries": 0,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "htmlparser2-parser-regressions",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 19.87,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 2,
+        "total": 2
+      },
+      "checks": [
+        {
+          "id": "svg-integration-points",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "attribute-entities",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "special-end-tags",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "abrupt-comments",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "nested-forms",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "typecheck",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 3,
+      "turns": 41,
+      "toolCalls": 35,
+      "toolCallsByName": {
+        "fabric_exec": 35
+      },
+      "toolErrors": 6,
+      "tokens": {
+        "input": 133097,
+        "output": 36641,
+        "cacheRead": 2930304,
+        "cacheWrite": 0,
+        "reasoning": 27029,
+        "total": 3100042
+      },
+      "costUsd": 0.06093324,
+      "peakContextTokens": 128575,
+      "compactions": 0,
+      "retries": 5,
+      "fabric": {
+        "execCalls": 35,
+        "codeChars": 18301,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 2,
+          "impact": 3
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "htmlparser2-parser-regressions",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 17.86,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 2,
+        "total": 2
+      },
+      "checks": [
+        {
+          "id": "svg-integration-points",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "attribute-entities",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "special-end-tags",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "abrupt-comments",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "nested-forms",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "typecheck",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 3,
+      "turns": 57,
+      "toolCalls": 84,
+      "toolCallsByName": {
+        "bash": 24,
+        "find": 5,
+        "read": 28,
+        "grep": 8,
+        "edit": 17,
+        "ls": 2
+      },
+      "toolErrors": 11,
+      "tokens": {
+        "input": 103044,
+        "output": 36993,
+        "cacheRead": 3365504,
+        "cacheWrite": 0,
+        "reasoning": 27975,
+        "total": 3505541
+      },
+      "costUsd": 0.06245594000000001,
+      "peakContextTokens": 91548,
+      "compactions": 0,
+      "retries": 3,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "jinja-compiler-regressions",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 10.97,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "branch-scoping",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "set-block-loops",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "loop-length",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "scoped-block-loop",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "constant-compare",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 8,
+      "turns": 35,
+      "toolCalls": 32,
+      "toolCallsByName": {
+        "fabric_exec": 32
+      },
+      "toolErrors": 1,
+      "tokens": {
+        "input": 116442,
+        "output": 39754,
+        "cacheRead": 2224768,
+        "cacheWrite": 0,
+        "reasoning": 31040,
+        "total": 2380964
+      },
+      "costUsd": 0.05376888,
+      "peakContextTokens": 112249,
+      "compactions": 0,
+      "retries": 2,
+      "fabric": {
+        "execCalls": 32,
+        "codeChars": 22750,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 3,
+          "impact": 2
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "jinja-compiler-regressions",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 28.56,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "branch-scoping",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "set-block-loops",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "loop-length",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "scoped-block-loop",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "constant-compare",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 5,
+      "turns": 50,
+      "toolCalls": 78,
+      "toolCallsByName": {
+        "bash": 18,
+        "ls": 1,
+        "grep": 15,
+        "read": 33,
+        "edit": 10,
+        "write": 1
+      },
+      "toolErrors": 7,
+      "tokens": {
+        "input": 95092,
+        "output": 26968,
+        "cacheRead": 2833664,
+        "cacheWrite": 0,
+        "reasoning": 18513,
+        "total": 2955724
+      },
+      "costUsd": 0.05132983999999999,
+      "peakContextTokens": 89452,
+      "compactions": 0,
+      "retries": 3,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "semver-req-engine",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "timeout",
+      "wallMin": 45,
+      "resolved": false,
+      "score": 0.6,
+      "failToPass": {
+        "passed": 3,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "upstream-req-tests",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "parse-and-errors",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "matching-releases",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "matching-prereleases",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "doctests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 2,
+      "turns": 59,
+      "toolCalls": 55,
+      "toolCallsByName": {
+        "fabric_exec": 55
+      },
+      "toolErrors": 9,
+      "tokens": {
+        "input": 137955,
+        "output": 66049,
+        "cacheRead": 4900992,
+        "cacheWrite": 0,
+        "reasoning": 51619,
+        "total": 5104996
+      },
+      "costUsd": 0.09582992,
+      "peakContextTokens": 135843,
+      "compactions": 0,
+      "retries": 4,
+      "fabric": {
+        "execCalls": 55,
+        "codeChars": 16885,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 2,
+          "impact": 1
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "semver-req-engine",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 16.43,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "upstream-req-tests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "parse-and-errors",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "matching-releases",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "matching-prereleases",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "doctests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 3,
+      "turns": 25,
+      "toolCalls": 44,
+      "toolCallsByName": {
+        "bash": 19,
+        "read": 13,
+        "find": 1,
+        "grep": 2,
+        "edit": 7,
+        "write": 2
+      },
+      "toolErrors": 5,
+      "tokens": {
+        "input": 86132,
+        "output": 34481,
+        "cacheRead": 1000064,
+        "cacheWrite": 0,
+        "reasoning": 28370,
+        "total": 1120677
+      },
+      "costUsd": 0.03585434000000001,
+      "peakContextTokens": 67165,
+      "compactions": 0,
+      "retries": 1,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "sqlglot-levenshtein-dialects",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 18.54,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 4,
+        "total": 4
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "upstream-dialect-tests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "parsing",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "generation",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "type-annotation",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 23,
+      "turns": 45,
+      "toolCalls": 43,
+      "toolCallsByName": {
+        "fabric_exec": 43
+      },
+      "toolErrors": 6,
+      "tokens": {
+        "input": 162079,
+        "output": 47619,
+        "cacheRead": 3789056,
+        "cacheWrite": 0,
+        "reasoning": 31864,
+        "total": 3998754
+      },
+      "costUsd": 0.07790795999999998,
+      "peakContextTokens": 142315,
+      "compactions": 0,
+      "retries": 1,
+      "fabric": {
+        "execCalls": 43,
+        "codeChars": 27882,
+        "foveaCalls": {
+          "sketch": 1,
+          "impact": 1
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "sqlglot-levenshtein-dialects",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 15.2,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 4,
+        "total": 4
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "upstream-dialect-tests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "parsing",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "generation",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "type-annotation",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 23,
+      "turns": 62,
+      "toolCalls": 211,
+      "toolCallsByName": {
+        "bash": 21,
+        "read": 91,
+        "grep": 60,
+        "find": 1,
+        "edit": 37,
+        "write": 1
+      },
+      "toolErrors": 3,
+      "tokens": {
+        "input": 157142,
+        "output": 35476,
+        "cacheRead": 5439616,
+        "cacheWrite": 0,
+        "reasoning": 20081,
+        "total": 5632234
+      },
+      "costUsd": 0.08784836,
+      "peakContextTokens": 148807,
+      "compactions": 0,
+      "retries": 4,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "sqlglot-optimizer-semantics",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 26.45,
+      "resolved": false,
+      "score": 0.75,
+      "failToPass": {
+        "passed": 3,
+        "total": 4
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "window-merge",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "null-extended-pushdown",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "row-limit-pushdown",
+          "kind": "fail_to_pass",
+          "passed": false,
+          "timedOut": false
+        },
+        {
+          "id": "datetrunc-lt",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 4,
+      "turns": 55,
+      "toolCalls": 52,
+      "toolCallsByName": {
+        "fabric_exec": 52
+      },
+      "toolErrors": 6,
+      "tokens": {
+        "input": 151249,
+        "output": 46684,
+        "cacheRead": 4798464,
+        "cacheWrite": 0,
+        "reasoning": 36309,
+        "total": 4996397
+      },
+      "costUsd": 0.08645154,
+      "peakContextTokens": 145113,
+      "compactions": 0,
+      "retries": 2,
+      "fabric": {
+        "execCalls": 52,
+        "codeChars": 14259,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 1,
+          "impact": 2
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "sqlglot-optimizer-semantics",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 14.08,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 4,
+        "total": 4
+      },
+      "passToPass": {
+        "passed": 1,
+        "total": 1
+      },
+      "checks": [
+        {
+          "id": "window-merge",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "null-extended-pushdown",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "row-limit-pushdown",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "datetrunc-lt",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 5,
+      "turns": 48,
+      "toolCalls": 68,
+      "toolCallsByName": {
+        "read": 20,
+        "bash": 22,
+        "find": 2,
+        "grep": 13,
+        "ls": 1,
+        "edit": 10
+      },
+      "toolErrors": 6,
+      "tokens": {
+        "input": 135536,
+        "output": 28139,
+        "cacheRead": 3688320,
+        "cacheWrite": 0,
+        "reasoning": 21261,
+        "total": 3851995
+      },
+      "costUsd": 0.06450629999999999,
+      "peakContextTokens": 117659,
+      "compactions": 0,
+      "retries": 1,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "yaml-merge-keys",
+      "arm": "fabric-fovea",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 31.25,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 3,
+        "total": 3
+      },
+      "checks": [
+        {
+          "id": "merge-semantics",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "merge-tags",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "merge-spec",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "cli",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "typecheck-tests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "roundtrip-properties",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "typecheck",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 16,
+      "turns": 68,
+      "toolCalls": 64,
+      "toolCallsByName": {
+        "fabric_exec": 64
+      },
+      "toolErrors": 11,
+      "tokens": {
+        "input": 182922,
+        "output": 74786,
+        "cacheRead": 7780480,
+        "cacheWrite": 0,
+        "reasoning": 54225,
+        "total": 8038188
+      },
+      "costUsd": 0.13348999999999997,
+      "peakContextTokens": 186598,
+      "compactions": 0,
+      "retries": 3,
+      "fabric": {
+        "execCalls": 64,
+        "codeChars": 47693,
+        "foveaCalls": {
+          "sketch": 1,
+          "focus": 7,
+          "impact": 1
+        }
+      },
+      "upstreamRefs": 0
+    },
+    {
+      "task": "yaml-merge-keys",
+      "arm": "vanilla",
+      "trial": 1,
+      "status": "completed",
+      "wallMin": 32.78,
+      "resolved": true,
+      "score": 1,
+      "failToPass": {
+        "passed": 5,
+        "total": 5
+      },
+      "passToPass": {
+        "passed": 3,
+        "total": 3
+      },
+      "checks": [
+        {
+          "id": "merge-semantics",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "merge-tags",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "merge-spec",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "cli",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "typecheck-tests",
+          "kind": "fail_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "test-suite",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "roundtrip-properties",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        },
+        {
+          "id": "typecheck",
+          "kind": "pass_to_pass",
+          "passed": true,
+          "timedOut": false
+        }
+      ],
+      "filesChanged": 19,
+      "turns": 97,
+      "toolCalls": 163,
+      "toolCallsByName": {
+        "ls": 3,
+        "find": 5,
+        "grep": 7,
+        "read": 65,
+        "write": 3,
+        "edit": 41,
+        "bash": 39
+      },
+      "toolErrors": 17,
+      "tokens": {
+        "input": 178574,
+        "output": 70357,
+        "cacheRead": 10226560,
+        "cacheWrite": 0,
+        "reasoning": 50481,
+        "total": 10475491
+      },
+      "costUsd": 0.15530150000000004,
+      "peakContextTokens": 164717,
+      "compactions": 0,
+      "retries": 1,
+      "fabric": {
+        "execCalls": 0,
+        "codeChars": 0,
+        "foveaCalls": {}
+      },
+      "upstreamRefs": 0
+    }
+  ]
+}

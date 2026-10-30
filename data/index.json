@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-10-30T12:22:23.367Z",
+  "runs": [
+    {
+      "id": "luna-max-r1",
+      "model": "openai-codex/gpt-6-luna",
+      "modelName": "GPT-6 Luna",
+      "thinking": "max",
+      "file": "luna-max-r1.json"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "dateutil-rrulestr",
+      "title": "Implement RFC 5545 recurrence-string parsing (`rrulestr`) in python-dateutil, including rule sets, DTSTART/EXDATE time zones and parser options",
+      "language": "python",
+      "category": "feature",
+      "repo": "dateutil/dateutil",
+      "url": "https://github.com/dateutil/dateutil",
+      "commit": "71d92da6f0318101653039ab3f051aef5d7e0438",
+      "f2p": 6,
+      "p2p": 1
+    },
+    {
+      "id": "expr-let-bindings",
+      "title": "Implement `let` variable bindings in the expr language (lexer → parser → checker → compiler)",
+      "language": "go",
+      "category": "feature",
+      "repo": "expr-lang/expr",
+      "url": "https://github.com/expr-lang/expr",
+      "commit": "4b31df3a2e0eefec04c017a82a00e0f08541d3e4",
+      "f2p": 6,
+      "p2p": 1
+    },
+    {
+      "id": "gotoml-decoder-regressions",
+      "title": "Fix five TOML conformance regressions in go-toml across the parser, fused map decoder, seen-tracker and encoder",
+      "language": "go",
+      "category": "bugfix",
+      "repo": "pelletier/go-toml",
+      "url": "https://github.com/pelletier/go-toml",
+      "commit": "686c980c47581bf19b6119b60e9a59f2aed04170",
+      "f2p": 5,
+      "p2p": 1
+    },
+    {
+      "id": "gotoml-wide-table-perf",
+      "title": "Make go-toml decoding scale linearly for wide tables, many headers and dotted keys",
+      "language": "go",
+      "category": "performance",
+      "repo": "pelletier/go-toml",
+      "url": "https://github.com/pelletier/go-toml",
+      "commit": "686c980c47581bf19b6119b60e9a59f2aed04170",
+      "f2p": 4,
+      "p2p": 3
+    },
+    {
+      "id": "htmlparser2-parser-regressions",
+      "title": "Fix five HTML parsing regressions in htmlparser2 (foreign content, entity decoding modes, raw-text end tags, comments, tree construction)",
+      "language": "typescript",
+      "category": "bugfix",
+      "repo": "fb55/htmlparser2",
+      "url": "https://github.com/fb55/htmlparser2",
+      "commit": "8eff7d8bd904c950c466871ccb3969cb9bbaf77f",
+      "f2p": 5,
+      "p2p": 2
+    },
+    {
+      "id": "jinja-compiler-regressions",
+      "title": "Fix five template rendering regressions in Jinja (symbol tracking, codegen, runtime loop context, constant folding)",
+      "language": "python",
+      "category": "bugfix",
+      "repo": "pallets/jinja",
+      "url": "https://github.com/pallets/jinja",
+      "commit": "5ef70112a1ff19c05324ff889dd30405b1002044",
+      "f2p": 5,
+      "p2p": 1
+    },
+    {
+      "id": "semver-req-engine",
+      "title": "Implement Cargo-flavored version requirement parsing and matching in the Rust semver crate",
+      "language": "rust",
+      "category": "feature",
+      "repo": "dtolnay/semver",
+      "url": "https://github.com/dtolnay/semver",
+      "commit": "280ebcb6edac3aa4cdc545dbff8a26c5ac4861fe",
+      "f2p": 5,
+      "p2p": 1
+    },
+    {
+      "id": "sqlglot-levenshtein-dialects",
+      "title": "Add a Levenshtein/edit-distance expression and transpile it across 15 SQL dialects",
+      "language": "python",
+      "category": "feature",
+      "repo": "tobymao/sqlglot",
+      "url": "https://github.com/tobymao/sqlglot",
+      "commit": "f31f109daef0ca99347d36295534a0d59956059c",
+      "f2p": 4,
+      "p2p": 1
+    },
+    {
+      "id": "sqlglot-optimizer-semantics",
+      "title": "optimize() silently changes query results (4 independent root causes)",
+      "language": "python",
+      "category": "bugfix",
+      "repo": "tobymao/sqlglot",
+      "url": "https://github.com/tobymao/sqlglot",
+      "commit": "f31f109daef0ca99347d36295534a0d59956059c",
+      "f2p": 4,
+      "p2p": 1
+    },
+    {
+      "id": "yaml-merge-keys",
+      "title": "Implement YAML 1.1 `<<` merge keys across schema, composition, toJS, stringify, Document API and CLI",
+      "language": "typescript",
+      "category": "feature",
+      "repo": "eemeli/yaml",
+      "url": "https://github.com/eemeli/yaml",
+      "commit": "528ef30d6ded4bd9f2c3521b670eb2b29d503c5c",
+      "f2p": 5,
+      "p2p": 3
+    }
+  ]
+}
