@@ -157,7 +157,8 @@
           "impact": 2
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "dateutil-rrulestr",
@@ -249,7 +250,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "expr-let-bindings",
@@ -339,7 +341,8 @@
           "impact": 1
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "expr-let-bindings",
@@ -431,7 +434,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "gotoml-decoder-regressions",
@@ -513,7 +517,8 @@
           "sketch": 1
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "gotoml-decoder-regressions",
@@ -599,7 +604,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "gotoml-wide-table-perf",
@@ -689,7 +695,8 @@
           "impact": 1
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "gotoml-wide-table-perf",
@@ -780,7 +787,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "htmlparser2-parser-regressions",
@@ -870,7 +878,8 @@
           "impact": 3
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "htmlparser2-parser-regressions",
@@ -961,7 +970,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "jinja-compiler-regressions",
@@ -1045,7 +1055,8 @@
           "impact": 2
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "jinja-compiler-regressions",
@@ -1130,7 +1141,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "semver-req-engine",
@@ -1214,7 +1226,8 @@
           "impact": 1
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "semver-req-engine",
@@ -1299,7 +1312,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "sqlglot-levenshtein-dialects",
@@ -1376,7 +1390,8 @@
           "impact": 1
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "sqlglot-levenshtein-dialects",
@@ -1455,7 +1470,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "sqlglot-optimizer-semantics",
@@ -1533,7 +1549,8 @@
           "impact": 2
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "sqlglot-optimizer-semantics",
@@ -1612,7 +1629,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "yaml-merge-keys",
@@ -1708,7 +1726,8 @@
           "impact": 1
         }
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     },
     {
       "task": "yaml-merge-keys",
@@ -1806,7 +1825,8 @@
         "codeChars": 0,
         "foveaCalls": {}
       },
-      "upstreamRefs": 0
+      "upstreamRefs": 0,
+      "infraReruns": 0
     }
   ]
 }
