@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T00:43:19.466Z",
+  "generatedAt": "2026-11-22T22:31:01.683Z",
   "runs": [
     {
       "id": "luna-max-r1",
@@ -21,6 +21,13 @@
       "modelName": "GPT-6.1 Sol",
       "thinking": "max",
       "file": "sol-max-r1.json"
+    },
+    {
+      "id": "sol-6.2-max-r1",
+      "model": "openai-codex/gpt-6.2-sol",
+      "modelName": "GPT-6.2 Sol",
+      "thinking": "max",
+      "file": "sol-6.2-max-r1.json"
     }
   ],
   "tasks": [
