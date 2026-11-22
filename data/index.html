@@ -1,1 +1,34 @@
-<!doctype html><meta charset="utf-8"><title>fabric-swe data</title><ul><li><a href="index.json">index.json</a></li><li><a href="luna-max-r1.json">luna-max-r1.json</a></li><li><a href="terra-max-r1.json">terra-max-r1.json</a></li><li><a href="sol-max-r1.json">sol-max-r1.json</a></li></ul>
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>fabric-swe · Data</title>
+<script>(function(){try{var s=localStorage.getItem('fabric-swe-theme');if(s==='dark'||s==='light')document.documentElement.setAttribute('data-theme',s);}catch(e){}})();</script>
+<style>
+:root,[data-theme="light"]{--bg:#f7f6f5;--fg:#000;--muted:rgba(25,25,25,.56);--line:rgba(25,25,25,.12);--hover:rgba(0,0,0,.03)}
+[data-theme="dark"]{--bg:#121211;--fg:#f5f4f2;--muted:rgba(245,244,242,.54);--line:rgba(245,244,242,.12);--hover:rgba(255,255,255,.04)}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.6 "Inter","Helvetica Neue",Helvetica,sans-serif;padding:44px 24px}
+.wrap{max-width:740px;margin:0 auto}
+h1{margin:12px 0 6px;font:400 28px/1.15 inherit;letter-spacing:-.02em}
+p{margin:0 0 24px;color:var(--muted)}
+a.back{color:var(--muted);text-decoration:none;font-size:13px}
+a.back:hover{color:var(--fg);text-decoration:underline}
+.list{border-top:1px solid var(--line)}
+a.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+a.row:hover{background:var(--hover)}
+code{font:400 13px "Geist Mono",ui-monospace,"SF Mono",Menlo,monospace}
+span.d{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← fabric-swe leaderboard</a>
+  <h1>Raw JSON data</h1>
+  <p>Public per-run aggregate telemetry and check pass/fail files. Generated 2026-11-22 00:43 UTC.</p>
+  <div class="list">
+    <a class="row" href="index.json"><code>index.json</code><span class="d">Suite task metadata and published runs</span></a><a class="row" href="luna-max-r1.json"><code>luna-max-r1.json</code><span class="d">GPT-6 Luna (openai-codex/gpt-6-luna, thinking: max) — 20 runs</span></a><a class="row" href="terra-max-r1.json"><code>terra-max-r1.json</code><span class="d">GPT-6.1 Terra (openai-codex/gpt-6.1-terra, thinking: max) — 20 runs</span></a><a class="row" href="sol-max-r1.json"><code>sol-max-r1.json</code><span class="d">GPT-6.1 Sol (openai-codex/gpt-6.1-sol, thinking: max) — 20 runs</span></a>
+  </div>
+</div>
+</body>
+</html>
