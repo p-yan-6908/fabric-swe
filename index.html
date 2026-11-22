@@ -318,14 +318,26 @@ h1 {
 }
 .scatter-svg .pt-group { cursor: pointer; transition: opacity 0.12s; }
 .scatter-svg .pt-group.dim { opacity: 0.2; }
+.scatter-svg .pt-leader {
+  stroke-width: 1.15;
+  stroke-opacity: 0.55;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.scatter-svg .pt-group.hl .pt-leader {
+  stroke-width: 1.45;
+  stroke-opacity: 0.95;
+}
 .scatter-svg .pt-lbl {
   font: 400 12px var(--sans);
   fill: var(--fg);
   paint-order: stroke;
   stroke: var(--bg);
-  stroke-width: 3.5px;
+  stroke-width: 4px;
   stroke-linejoin: round;
-  pointer-events: none;
+}
+.scatter-svg .pt-group.hl .pt-lbl {
+  font-weight: 500;
 }
 .scatter-svg .crosshair {
   stroke: var(--line-strong);
@@ -1371,7 +1383,7 @@ footer {
 
 <footer>
   <div class="wrap footer-inner">
-    <span>fabric-swe · generated 2026-11-22 22:31 UTC · luna-max-r1, terra-max-r1, sol-max-r1, sol-6.2-max-r1</span>
+    <span>fabric-swe · generated 2026-11-22 22:42 UTC · luna-max-r1, terra-max-r1, sol-max-r1, sol-6.2-max-r1</span>
     <div class="footer-links">
       <a href="data/index.json">index.json</a>
       <a href="data/">data/</a>
@@ -1605,7 +1617,7 @@ footer {
     var xDef = X_DEFS[state.scatterX];
     var yKey = state.scatterY;
     var isLog = state.scatterLog;
-    var W = 960, H = 480, L = 58, R = 28, T = 26, B = 64;
+    var W = 960, H = 480, L = 58, R = 28, T = 30, B = 64;
 
     var pts = items.map(function(e){
       return { e: e, x: Math.max(xDef.get(e.s), 1e-4), y: e.s[yKey] };
@@ -1618,7 +1630,7 @@ footer {
       ? Math.max(0, Math.floor((minYVal - 0.04) * 20) / 20)
       : Math.max(0, Math.floor((minYVal - 0.1) * 10) / 10);
     if (1 - yMin < 0.1) yMin = Math.max(0, round(1 - 0.12, 2));
-    var yMax = 1.03;
+    var yMax = round(yMin + (1 - yMin) * 1.09, 4);
     var yStep = (1 - yMin) > 0.45 ? 0.1 : 0.05;
 
     var sx, xTicks;
@@ -1701,38 +1713,221 @@ footer {
     // Hover crosshair layer
     svg.push('<g id="scatter-crosshair"></g>');
 
-    // Labels with collision avoidance
-    var lbls = pts.map(function(p){
+    // Collect active chart line segments so labels avoid crossing pair connectors & Pareto frontier
+    var segments = [];
+    if (state.showPareto && pareto.length >= 1) {
+      if (pareto.length >= 2) {
+        for (var pi = 1; pi < pareto.length; pi++) {
+          segments.push({ x1: sx(pareto[pi - 1].x), y1: sy(pareto[pi - 1].y), x2: sx(pareto[pi].x), y2: sy(pareto[pi].y) });
+        }
+      } else {
+        var px0 = sx(pareto[0].x), py0 = sy(pareto[0].y);
+        segments.push({ x1: L, y1: py0, x2: px0, y2: py0 });
+        segments.push({ x1: px0, y1: py0, x2: px0, y2: H - B });
+      }
+    }
+    if (state.showPairs) {
+      RUNS.forEach(function(run){
+        if (state.hiddenRuns[run.id]) return;
+        var own = pts.filter(function(p){ return p.e.run.id === run.id; }).sort(function(a, b){ return a.x - b.x; });
+        if (own.length >= 2) {
+          segments.push({ x1: sx(own[0].x), y1: sy(own[0].y), x2: sx(own[1].x), y2: sy(own[1].y) });
+        }
+      });
+    }
+
+    // Labels with obstacle-aware multi-candidate placement (avoids other labels, markers, lines & bounds)
+    function estimateTextW(str){
+      var w = 0;
+      for (var i = 0; i < str.length; i++) {
+        var ch = str[i];
+        if ("il.,():;'|!".indexOf(ch) >= 0) w += 3.9;
+        else if (ch === ' ') w += 3.7;
+        else if ('mwMW'.indexOf(ch) >= 0) w += 9.5;
+        else if (ch >= 'A' && ch <= 'Z') w += 7.8;
+        else w += 6.7;
+      }
+      return w + 5;
+    }
+    function makeLabelBox(lx, ly, w, anchor){
+      var x0 = anchor === 'start' ? lx : (anchor === 'end' ? lx - w : lx - w / 2);
+      return { x0: x0, y0: ly - 11.5, x1: x0 + w, y1: ly + 3.5 };
+    }
+    function overlapArea(a, b, px, py){
+      var ox = Math.max(0, Math.min(a.x1 + px, b.x1 + px) - Math.max(a.x0 - px, b.x0 - px));
+      var oy = Math.max(0, Math.min(a.y1 + py, b.y1 + py) - Math.max(a.y0 - py, b.y0 - py));
+      return ox * oy;
+    }
+    function segBoxLen(x1, y1, x2, y2, box, pad){
+      var p = pad || 0;
+      var xmin = box.x0 - p, xmax = box.x1 + p, ymin = box.y0 - p, ymax = box.y1 + p;
+      var t0 = 0, t1 = 1, dx = x2 - x1, dy = y2 - y1;
+      var checks = [[-dx, x1 - xmin], [dx, xmax - x1], [-dy, y1 - ymin], [dy, ymax - y1]];
+      for (var ci = 0; ci < 4; ci++) {
+        var pk = checks[ci][0], qk = checks[ci][1];
+        if (Math.abs(pk) < 1e-9) {
+          if (qk < 0) return 0;
+        } else {
+          var t = qk / pk;
+          if (pk < 0) { if (t > t1) return 0; if (t > t0) t0 = t; }
+          else        { if (t < t0) return 0; if (t < t1) t1 = t; }
+        }
+      }
+      return t0 > t1 ? 0 : Math.max(0.01, (t1 - t0) * Math.sqrt(dx * dx + dy * dy));
+    }
+    function nearestOnBox(cx, cy, box){
+      var nx = Math.max(box.x0, Math.min(cx, box.x1));
+      var ny = Math.max(box.y0, Math.min(cy, box.y1));
+      var dx = nx - cx, dy = ny - cy;
+      return { x: nx, y: ny, dist: Math.sqrt(dx * dx + dy * dy) };
+    }
+    function segsCross(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2){
+      function ccw(x1, y1, x2, y2, x3, y3){ return (y3 - y1) * (x2 - x1) > (y2 - y1) * (x3 - x1); }
+      return (ccw(ax1, ay1, bx1, by1, bx2, by2) !== ccw(ax2, ay2, bx1, by1, bx2, by2)) &&
+             (ccw(ax1, ay1, ax2, ay2, bx1, by1) !== ccw(ax1, ay1, ax2, ay2, bx2, by2));
+    }
+
+    var rawOffsets = [
+      [11,  -6,  'start',  0],
+      [12,   4,  'start',  2],
+      [11,  15,  'start',  4],
+      [-11, -6,  'end',    3],
+      [-12,  4,  'end',    5],
+      [-11, 15,  'end',    7],
+      [0,  -12,  'middle', 6],
+      [0,   20,  'middle', 8],
+      [12, -13,  'start',  8],
+      [12,  11,  'start',  9],
+      [-12,-13,  'end',    9],
+      [-12, 11,  'end',   10],
+      [14, -20,  'start',  14],
+      [14,  25,  'start',  16],
+      [-14,-20,  'end',    16],
+      [-14, 25,  'end',    18],
+      [0,  -26,  'middle', 18],
+      [0,   32,  'middle', 20],
+      [16, -32,  'start',  28],
+      [16,  38,  'start',  30],
+      [-16,-32,  'end',    30],
+      [-16, 38,  'end',    32],
+      [0,  -40,  'middle', 34],
+      [0,   46,  'middle', 36],
+      [32, -26,  'start',  38],
+      [-32,-26,  'end',    38],
+      [32,  32,  'start',  40],
+      [-32, 32,  'end',    40],
+      [24, -44,  'start',  44],
+      [24,  50,  'start',  46],
+      [-24,-44,  'end',    46],
+      [-24, 50,  'end',    48],
+      [0,  -54,  'middle', 52],
+      [0,   60,  'middle', 54],
+      [18, -58,  'start',  56],
+      [-18,-58,  'end',    56],
+      [18,  64,  'start',  58],
+      [-18, 64,  'end',    58],
+      [0,  -68,  'middle', 62],
+      [0,   74,  'middle', 64]
+    ];
+
+    var candidatesPerPt = pts.map(function(p){
       var cx = sx(p.x), cy = sy(p.y);
       var tag = state.armFilter === 'all'
         ? p.e.run.modelName + ' (' + (isCodeArm(p.e.arm) ? 'code' : 'vanilla') + ')'
         : p.e.run.modelName;
-      var rightSpace = (W - R) - cx;
-      var anchor = rightSpace < 165 ? 'end' : 'start';
-      var lx = anchor === 'start' ? cx + 11 : cx - 11;
-      var ly = cy - 9;
-      return { p: p, cx: cx, cy: cy, lx: lx, ly: ly, anchor: anchor, text: tag };
+      var w = estimateTextW(tag);
+      var minX = L + 6, maxX = W - R - 6, minY = T + 4, maxY = H - B - 6;
+
+      return rawOffsets.map(function(o){
+        var lx = cx + o[0], ly = cy + o[1], anchor = o[2], pen = o[3];
+        var box = makeLabelBox(lx, ly, w, anchor);
+        var near = nearestOnBox(cx, cy, box);
+
+        if (box.x0 < minX) pen += 12000 + (minX - box.x0) * 120;
+        if (box.x1 > maxX) pen += 12000 + (box.x1 - maxX) * 120;
+        if (box.y0 < minY) pen += 12000 + (minY - box.y0) * 120;
+        if (box.y1 > maxY) pen += 12000 + (box.y1 - maxY) * 120;
+
+        pts.forEach(function(q){
+          var qx = sx(q.x), qy = sy(q.y);
+          var mBox = { x0: qx - 9.5, y0: qy - 9.5, x1: qx + 9.5, y1: qy + 9.5 };
+          var area = overlapArea(box, mBox, 2, 2);
+          if (area > 0) pen += 9000 + area * 30;
+          if (q !== p && near.dist > 15 && segBoxLen(cx, cy, near.x, near.y, mBox, 1) > 0) {
+            pen += 2200;
+          }
+        });
+
+        segments.forEach(function(seg){
+          var sLen = segBoxLen(seg.x1, seg.y1, seg.x2, seg.y2, box, 2.5);
+          if (sLen > 0) pen += 3500 + sLen * 30;
+          if (near.dist > 15 && segsCross(cx, cy, near.x, near.y, seg.x1, seg.y1, seg.x2, seg.y2)) {
+            pen += 600;
+          }
+        });
+
+        return { p: p, cx: cx, cy: cy, lx: lx, ly: ly, w: w, anchor: anchor, text: tag, box: box, near: near, staticPen: pen };
+      });
     });
-    lbls.sort(function(a, b){ return a.ly - b.ly; });
-    for (var pass = 0; pass < 5; pass++) {
-      for (var i = 1; i < lbls.length; i++) {
-        var a = lbls[i - 1], b = lbls[i];
-        if (Math.abs(a.lx - b.lx) < 160 && Math.abs(a.ly - b.ly) < 16) {
-          b.ly = a.ly + 17;
+
+    var order = pts.map(function(_, idx){
+      var freeCount = candidatesPerPt[idx].filter(function(c){ return c.staticPen < 100; }).length;
+      return { idx: idx, freeCount: freeCount };
+    }).sort(function(a, b){ return a.freeCount - b.freeCount; }).map(function(x){ return x.idx; });
+
+    var lbls = new Array(pts.length);
+    function pairPenalty(a, b){
+      var area = overlapArea(a.box, b.box, 5, 3);
+      var p = area > 0 ? (9000 + area * 40) : 0;
+      if (a.near.dist > 15 && segBoxLen(a.cx, a.cy, a.near.x, a.near.y, b.box, 2) > 0) p += 2500;
+      if (b.near.dist > 15 && segBoxLen(b.cx, b.cy, b.near.x, b.near.y, a.box, 2) > 0) p += 2500;
+      if (a.near.dist > 15 && b.near.dist > 15 && segsCross(a.cx, a.cy, a.near.x, a.near.y, b.cx, b.cy, b.near.x, b.near.y)) p += 1800;
+      return p;
+    }
+
+    for (var oi = 0; oi < order.length; oi++) {
+      var idx = order[oi];
+      var cands = candidatesPerPt[idx];
+      var bestCand = cands[0], bestScore = Infinity;
+      for (var ci = 0; ci < cands.length; ci++) {
+        var cand = cands[ci];
+        var score = cand.staticPen;
+        for (var oj = 0; oj < oi; oj++) {
+          score += pairPenalty(cand, lbls[order[oj]]);
+        }
+        if (score < bestScore) { bestScore = score; bestCand = cand; }
+      }
+      lbls[idx] = bestCand;
+    }
+
+    for (var pass = 0; pass < 16; pass++) {
+      var changed = false;
+      for (var oi2 = 0; oi2 < order.length; oi2++) {
+        var i = order[oi2];
+        var curBest = lbls[i], curScore = Infinity;
+        var cands2 = candidatesPerPt[i];
+        for (var c2 = 0; c2 < cands2.length; c2++) {
+          var cand2 = cands2[c2];
+          var sc = cand2.staticPen;
+          for (var j = 0; j < pts.length; j++) {
+            if (i === j) continue;
+            sc += pairPenalty(cand2, lbls[j]);
+          }
+          if (sc < curScore) { curScore = sc; curBest = cand2; }
+        }
+        if (curBest !== lbls[i]) {
+          lbls[i] = curBest;
+          changed = true;
         }
       }
+      if (!changed) break;
     }
-    lbls.forEach(function(l){
-      if (l.ly < T + 12) l.ly = T + 12;
-      if (l.ly > H - B - 6) l.ly = H - B - 6;
-    });
 
     // Markers with FrontierCode #f7f6f5 knockout halo (circle = code mode, square = vanilla)
     pts.forEach(function(p){
       var cx = sx(p.x), cy = sy(p.y);
       var c = p.e.color;
       var isCode = isCodeArm(p.e.arm);
-      var l = lbls.find(function(x){ return x.p === p; });
       svg.push('<g class="pt-group" data-ekey="' + esc(p.e.key) + '" data-cx="' + cx.toFixed(1) + '" data-cy="' + cy.toFixed(1) + '">');
       if (isCode) {
         svg.push('<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="7.2" fill="var(--bg)"/>');
@@ -1741,9 +1936,23 @@ footer {
         svg.push('<rect x="' + (cx - 6.8).toFixed(1) + '" y="' + (cy - 6.8).toFixed(1) + '" width="13.6" height="13.6" fill="var(--bg)"/>');
         svg.push('<rect x="' + (cx - 4.7).toFixed(1) + '" y="' + (cy - 4.7).toFixed(1) + '" width="9.4" height="9.4" style="fill:' + c + '"/>');
       }
-      if (l) {
-        svg.push('<text class="pt-lbl" x="' + l.lx.toFixed(1) + '" y="' + l.ly.toFixed(1) + '" text-anchor="' + l.anchor + '">' + esc(l.text) + '</text>');
+      svg.push('</g>');
+    });
+
+    // Top layer: leader lines (for displaced labels) + model labels above all markers and lines
+    pts.forEach(function(p, idx){
+      var cx = sx(p.x), cy = sy(p.y);
+      var c = p.e.color;
+      var l = lbls[idx];
+      if (!l) return;
+      svg.push('<g class="pt-group" data-ekey="' + esc(p.e.key) + '" data-cx="' + cx.toFixed(1) + '" data-cy="' + cy.toFixed(1) + '">');
+      if (l.near.dist > 15) {
+        var ux = (l.near.x - cx) / l.near.dist, uy = (l.near.y - cy) / l.near.dist;
+        var x1 = cx + ux * 8.2, y1 = cy + uy * 8.2;
+        var x2 = l.near.x - ux * 1.5, y2 = l.near.y - uy * 1.5;
+        svg.push('<line class="pt-leader" x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" style="stroke:' + c + '"/>');
       }
+      svg.push('<text class="pt-lbl" x="' + l.lx.toFixed(1) + '" y="' + l.ly.toFixed(1) + '" text-anchor="' + l.anchor + '">' + esc(l.text) + '</text>');
       svg.push('</g>');
     });
 
